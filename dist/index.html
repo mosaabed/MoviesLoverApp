@@ -8,34 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    
 </head>
 
 <body>
-    <ul>
-        <li><a onclick="HomeClicked()" >Home</a></li>
-        <li><a >Profile</a></li>
-        <li><a >Search</a></li>
-        <li style="float:right"><a class="active" >About</a></li>
+    <ul class = "nav-ul">
+        <li style="float:left">
+            <a onclick="HomeClicked()" class = 'nav-li-a'>Home</a></li>
+        <li style="float:left">
+            <a class = 'nav-li-a'>Profile  </a></li>
+        <li style="float:left">
+            <a onclick="searchClicked()" class = 'nav-li-a'>Search</a></li>
+        <li style="float:right; background-color: #4CAF50"><a class="nav-li-a" >About</a></li>
     </ul>
       
     <div id = "mainDiv" ></div>
 
+    <script id="search-template" type="text/x-handlebars-template">
+        <ul class = "search-ul">
+            {{#each this}}
+                <li><a  class = "search-li-a">{{this}}</a></li>
+            {{/each}}
+        </ul>
+    </script>
 
-    <script id="recipes-template" type="text/x-handlebars-template">
-        {{#each this}}
-           <div>
-            <a href={{href}} >{{title}}</a>
-           </div>
-           <div>
-            <img src={{thumbnail}}
-            style="width:211px;height:247px;" class = "imgClick" >
-           {{#each ingredients}}
-           <li>
-               <span >{{this}}</span>
-           </li>
-           {{/each}}
-        </div>
-        {{/each}}
+    <script id="searchResult-template" type="text/x-handlebars-template">
     </script>
 
     <script src="Render.js"></script>
@@ -44,6 +41,9 @@
     <script src="HomeRender.js"></script>
     <script src="ProfileRender.js"></script>
     <script src="SearchRender.js"></script>
+    <script src="LoginPage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
     <script src="main.js"></script>
 </body>
 
