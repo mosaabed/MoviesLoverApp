@@ -1,0 +1,8 @@
+class SearchRender
+{
+    constructor(){}
+
+    render(){
+
+    }
+}
