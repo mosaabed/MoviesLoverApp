@@ -1,8 +1,0 @@
-class ProfileRender{
-
-    constructor(){}
-
-    render(){
-
-    }
-}

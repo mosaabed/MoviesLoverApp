@@ -19,6 +19,7 @@
   "homepage": "https://github.com/mosaabed/MoviesLoverApp#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "jquery": "^3.5.1",
     "mongoose": "^5.11.5",
     "urllib": "^2.36.1"
   }

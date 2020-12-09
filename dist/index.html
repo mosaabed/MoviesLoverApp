@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,59 +9,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-    
 </head>
-
 <body>
-
-
-    <ul class = "nav-ul">
-        <li style="float:left">
-            <a onclick="HomeClicked()" class = 'nav-li-a'>Home</a></li>
-        <li style="float:left">
-            <a class = 'nav-li-a'>Profile  </a></li>
-        <li style="float:left">
-            <a onclick="searchClicked()" class = 'nav-li-a'>Search</a></li>
-
-      <li onclick="goSignIn()"><a >Sign In</a></li>
-        <li style="float:right; background-color: #4CAF50"><a class="nav-li-a" >About</a></li>
-    </ul>
-
-    <div id = "mainDiv" ></div>
-
-    <script id="search-template" type="text/x-handlebars-template">
-        <ul class = "search-ul">
-            {{#each this}}
-                <li><a  class = "search-li-a">{{this}}</a></li>
-            {{/each}}
-        </ul>
-    </script>
-
-    <script id="searchResult-template" type="text/x-handlebars-template">
-    </script>
-
-    <script id="profilePage-template" type="text/x-handlebars-template">
-        <h1>My Profile</h1>
-        <h2 onclick="HomeClicked()">Home</h2>
-            <div class="user-info">
-                <img src="{{profilePic}}" alt="" id="profile-pic">
-                <div id="info">
-                    <div id="name">{{userName}}</div>
-                    <div id="bio">
-                        <span>Biography: </span>
-                        <p>{{text}}</p>
-                    </div>
-                </div>
-                <div>
-                    <i class="fas fa-heart"></i>
-                    <i class="far fa-clock"></i>
-                </div>
-            </div>
-    </script>
-
-    <script id="signIn-template" type="text/x-handlebars-template">
-        <h1>Sign In</h1>
-        <div id="SignIn-container">
+    <div id = "mainDiv">
+      <h1>Sign In</h1>
+          <div id="SignIn-container">
             <div>
                 <span>User Name: </span>
                 <input type="text" placeholder="Enter your User Name" id="userNameSignIn">
@@ -77,11 +28,10 @@
             <div>
                 <span id="signUp" onclick="goSignUp()">You are not registered yet? SignUp </span>
             </div>
-
         </div>
-    </script>
-
-    <script id="signUp-template" type="text/x-handlebars-template">
+    </div>
+    <!--THE SIGN UP TEMPLATE-->
+    <script id="signup-template" type="text/x-handlebars-template"> 
         <h1>Sign Up</h1>
         <div id="signUp-container">
         <div>
@@ -104,23 +54,110 @@
             <button id="signUp" onclick="signUp()">Sign Up</button>
         </div>
     </div>
-
     </script>
-
-    <script src="Render.js"></script>
-    <script src="./jquery/dist/jquery.js"></script>
-    <script src="./handlebars/dist/handlebars.js"></script>
-    <script src="HomeRender.js"></script>
-    <script src="ProfileRender.js"></script>
-    <script src="SearchRender.js"></script>
-    <script src="signUpRender.js"></script>
-    <script src="signInRender.js"></script>
-    <script src="profilePageRender.js"></script>
-    <script src="LoginPage.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <!--NAV BAR TEMPLATE-->
+    <script id="navbar-template" type="text/x-handlebars-template"> 
+        <ul class = "nav-ul">
+            <li style="float:left">
+                 <a onclick="HomeClicked()" class = 'nav-li-a'>Home</a></li>
+            <li style="float:left">
+                <a onclick="myProfile()" class = 'nav-li-a'>Profile  </a></li>
+             <li style="float:left">
+                <a onclick="startSearch()" class = 'nav-li-a'>Search  </a></li>
+            <li style="float:right; background-color: #4CAF50"><a class="nav-li-a" >About</a></li>
+        </ul>
+    <div id = "containerDiv"></div>
+    </script>
+    <!--THE POST TEMPLATE-->
+    <script id="post-template" type="text/x-handlebars-template">
+        <div class="post" id={{postID}}>
+            <div>
+                <span style="color: #514f59;">{{userName}} say's about {{movieTitle}}:</span>
+            </div>
+            <div>
+                <img class="poster" src="{{moviePoster}}" alt="">
+            </div>
+            <div>
+                <span>{{text}}</span>
+            </div>
+            <div>
+                <span>{{likes}}</span>
+                <i class="far fa-thumbs-up"></i>
+                <button>Like</button>
+                <button>Comment</button>
+            </div>
+            <div id="comments-container">
+                {{#each comments}}
+                <div class="comment">
+                <img class="userImg" src="{{userImage}}" alt="">
+                <span style="color: #514f59;">{{this.userName}}</span>
+                <div>{{this.text}}</div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+    <!--THE SEARCH PAGE TEMPLATE-->
+    <script id="search-template" type="text/x-handlebars-template">
+         <div class="header">
+            <input type="text" id="search-title">
+            <button onclick="searchByTitle()">Search By Title</button>
+            <input type="text" id="search-genre">
+            <button onclick="searchByGenre()">Search By Genre</button>
+        </div>
+        <div class="movies-container"></div>
+    </script>
+    <!--THE PROFILE TEMPLATE-->
+    <script id="profilePage-template" type="text/x-handlebars-template">
+        <h1>My Profile</h1>
+            <div class="user-info">
+                <img id="profilePic" src="{{profilePic}}" alt="" id="profile-pic">
+                <div id="info">
+                    <div id="name">{{userName}}</div>
+                </div>
+                <div id="bio">
+                    <span style="color:#514f59 ;">Biography: </span>
+                    <p>{{bio}}</p>
+                </div>
+                <div id="watch"> 
+                    <div>
+                        <span onclick="favoriteShows()">Movies I watched and liked </span>
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div>
+                        <span>Movies to watch later</span>
+                        <i class="far fa-clock"></i>
+                    </div>
+                </div>
+            </div>
+    </script>
+    <!--THE MOVIE TEMPLATE-->
+    <script id="movie-template" type="text/x-handlebars-template">
+        <p>{{title}}<br>
+        <img src={{poster}} width='200' height='200' class='img'>
+    </script>
+    <!--THE MOVIE INFO TEMPLATE-->
+    <script id="movieinfo-template" type="text/x-handlebars-template">
+        <div class="movie">
+            <p class="movie-title">{{title}}</p>
+            <img src={{poster}} width='200' height='200' class='img'>
+            <p id="basic-info">{{pos}}<br>{{rating}}<br>{{votesNum}}<br>{{genre}}</p>
+            <div class="additional-info">More Info:</div>
+            <p>Year: {{year}}</p>
+            <p>{{director}}</p>
+            <ul class="list">
+                {{#each actors}}
+                <li class="ele">{{this}}</li>
+                {{/each}}
+            </ul>
+            <p id="plot">PLOT: {{plot}}</p><br>
+            <a class="trailer" href={{trailer}}>Movie Trailer</a>
+        </div>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+    <script src="render.js"></script>
+    <script src="classes.js"></script>
     <script src="main.js"></script>
 </body>
-
 </html>
-

@@ -1,114 +1,246 @@
+let currentProfile 
+let movieByTitle 
+let moviesArr = []
 
-const homeRender = new HomeRender()
-const profileRender = new ProfileRender()
-const searchRender = new SearchRender()
-const loginPage = new LoginPage()
-
-
-
-let UserProfile = null
-UserProfile = loginPage.render()
-let User
-
-let UserProfile = 1
-//UserProfile = loginPage.render()
-
-
-
-function logIn(userName, password){
-
-
-function HomeClicked()
-{
-    if(UserProfile != null){
-        console.log("home page opend")
-        $.get('/home' , function(data){
-            homeRender.render(data);
-        })
-    }else
-    {
-        alert("you need to login first")
-    }
-    
+function getHomePage(){
+    $.ajax({
+        method: "GET",
+        url: `/homePage`,
+        success: function (data){
+            homeRender(data)
+           
+        },
+        error: function (xhr, text, error) {
+            console.log(text)
+        }
+    })
 }
 
-function ProfileClicked()
-{
-    if(UserProfile){
-        console.log("profile page opend")
-        $.get('/profile' , function(data)
-        {
-            profileRender.render(data)
-        })
-    }else{
-        alert("you need to login first")
-    }
-    
+function HomeClicked(){
+    getHomePage()
 }
 
-function searchClicked()
-{
-
-    if(UserProfile != null ){
-        console.log("search page opend")
-        searchRender.render()
-    }else
-    {
-        alert("you need to login first")
-    }
-} 
-
-function search()
-{
-    let movieName =  $('#movieName').val()
-}
-
-
-
-function goSignIn(){
-    const signInRenderer = new signInRender()
-    signInRenderer.render()
-}
-function goSignUp(){
-    const signUpRenderer = new signUpRender()
-    signUpRenderer.render()
-}
-function signUp(){
-    let userName = $("#userName").val()
-    let password = $("#password").val()
-    let profilePic = $("#profilePic").val()
-    let bio = $("#bio").val()
-    //check if userName unique
-    //save to data base
-    const profilePageRenderer = new profilePageRender()
-    profilePageRenderer.render()
-}
 function signIn(){
     let userName = $("#userNameSignIn").val()
     let password = $("#passwordSignIn").val()
-    //check if userName exists 
-    //check if password correct
-    //get user 
-
+    $.ajax({
+        method: "GET",
+        url: `LogIn/${userName}/${password}`,
+        success: function (data){
+            if(data === "login successed"){
+                $.ajax({
+                    method: "GET",
+                    url: `getProfile/${userName}`,
+                    success: function (user){
+                        currentProfile = new Profile(user.userName, user.password, user.profilePic, user.bio)
+                        getHomePage()
+                    },
+                    error: function (xhr, text, error) {
+                        console.log(text)
+                    }
+                })
+            }
+            else{
+                if(data === "wrong password"){
+                    alert("WRONG PASSWORD, TRY AGAIN")
+                }
+                else{
+                    if(data === "This user does not exist, register now"){
+                        signUpRender()
+                    }
+                }
+            }
+        },
+        error: function (xhr, text, error) {
+            console.log(text)
+        }
+    })
 }
-function search()
-{
-    let movieName =  $('#movieName').val()
-    console.log( movieName)
-    // $.get(`` , function(data)
-    // {
-    //     searchRender.resultRender(data)
-    // })
-    $('#movieName').val("")
-    $('#movieYear').val("")
+
+function goSignUp(){
+    signUpRender()
 }
-$("#mainDiv").on("click" , ".search-li-a" ,function()
-{
-    // $.get(`` , function(data)
-    // {
-    //     searchRender.resultRender(data)
-    // })
-    console.log(this.innerHTML)
-}) 
+
+function signUp(){
+    let userName = $("#userName").val()
+    let password = $("#password").val()
+    let pic = $("#profilePic").val()
+    let bio = $("#bio").val()
+    let newUser = new Profile(userName, password, pic, bio,"")
+    $.post('/addNewUser', newUser, function (response) {
+        console.log("user added")
+        signInRender(newUser)
+    })
+}
+
+function myProfile(){
+  profileRender(currentProfile)
+}
+
+function startSearch(){
+  searchPage()
+}
+
+function sharePost(){
+    let text  //$("")
+    let movieTitle
+    let moviePoster
+    let newPost = new Post(text, currentProfile.userName, movieTitle, moviePoster, "")
+    $.post('/sharePost', newPost, function (response){
+        console.log("post added")
+    })
+    getHomePage()
+}
+
+function searchByTitle(){
+    let title = $("#search-title").val()
+    $.ajax({
+        method: "GET",
+        url: `/searchByTitle/${title}`,
+        success: function (data){
+            movieByTitle = new Movie(data.title, data.rating, data.votesNum, data.genre, data.director, data.actors, data.plot, data.trailer, data.poster, data.year)
+            moviesRender([data])
+        },
+        error: function (xhr, text, error) {
+            console.log(text)
+        }
+    })
+}
+
+const findGenreId = genre => genres.find(ele => ele.name === genre)
+
+function searchByGenre(){
+    let genre 
+    let genreID = findGenreId(genre)
+    $.ajax({
+        method: "GET",
+        url: `/searchByGenre/${genreID}`,
+        success: function (data){
+            for(let ele of data){
+                let movie = new Movie(ele, "", "","","","","","","","")
+                moviesArr.push(movie)
+            }
+            moviesRender(moviesArr)
+        },
+        error: function (xhr, text, error) {
+            console.log(text)
+        }
+    })
+}
+
+function displayMovieInfo(){
+    let title
+    if(title === movieByTitle.title){
+        $.ajax({
+            method: "GET",
+            url: `/getTrailer/${title}`,
+            success: function (data){
+                movieByTitle.trailer = data
+                movieInfoRender(movieByTitle)
+            },
+            error: function (xhr, text, error) {
+                console.log(text)
+            }
+        })
+    }
+    else{
+        let index = moviesArr.findIndex(ele => ele.title === title)
+        $.ajax({
+            method: "GET",
+            url: `/searchByTitle/${title}`,
+            success: function (data){
+                let newMovie= new Movie(data.title, data.rating, data.votesNum, data.genre, data.director, data.actors, data.plot, data.trailer, data.poster, data.year)
+                $.ajax({
+                    method: "GET",
+                    url: `/getTrailer/${newMovie.title}`,
+                    success: function (link){
+                        newMovie.trailer = link
+                        movieInfoRender(newMovie)
+                    },
+                    error: function (xhr, text, error) {
+                        console.log(text)
+                    }
+                })
+                moviesRender([data])
+            },
+            error: function (xhr, text, error) {
+                console.log(text)
+            }
+        })
+    }
+}
+
+function likeMovie(){
+    let movieTitle
+    let poster
+    let parameter ={
+        userName: currentProfile.userName,
+        showTitle: movieTitle,
+        showPic: poster
+    }
+    $.post('/addShowToFavorite', parameter, function(response){
+        console.log("added to favorite shows")
+    })
+}
+
+function watchLater(){
+    let movieTitle
+    let poster
+    let parameter ={
+        userName: currentProfile.userName,
+        showTitle: movieTitle,
+        showPic: poster
+    }
+    $.post('/addToWatchLater', parameter, function(response){
+        console.log("added to watch later")
+    })
+}
+
+function commentOnPost(){
+    let postID
+    let text
+    let parameter ={
+        id: postID,
+        userName: currentProfile.userName,
+        text: text
+    }
+    $.post('/addCommentToPost', parameter, function(response){
+        console.log("added comment")
+        getHomePage()
+    })
+}
+
+function likePost(){
+    let postID
+    $.post('/addCommentToPost', postID, function(response){
+        console.log("added like")
+        getHomePage
+    })
+}
+
+function favoriteShows(){
+    $.ajax({
+        method: "GET",
+        url: `/getFavoriteShows/${currentProfile.userName}`,
+        success: function (data){
+            moviesRender(data)
+        },
+        error: function (xhr, text, error) {
+            console.log(text)
+        }
+    })
+}
 
 
+function watchLaterShows(){
+    $.ajax({
+        method: "GET",
+        url: `/getWatchLaterShows/${currentProfile.userName}`,
+        success: function (data){
+            moviesRender(data)
+        },
+        error: function (xhr, text, error) {
+            console.log(text)
+        }
+    })
+}
