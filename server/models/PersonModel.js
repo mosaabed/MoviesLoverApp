@@ -18,3 +18,4 @@ const PersonSchema = new Schema({
 
 const Person = mongoose.model("PersonModel", PersonSchema)
 module.exports = Person 
+
