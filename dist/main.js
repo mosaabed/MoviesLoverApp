@@ -3,8 +3,13 @@ const profileRender = new ProfileRender()
 const searchRender = new SearchRender()
 const loginPage = new LoginPage()
 
+
+let UserProfile = null
+UserProfile = loginPage.render()
+let User
 let UserProfile = 1
 //UserProfile = loginPage.render()
+
 
 
 function HomeClicked()
@@ -46,6 +51,35 @@ function searchClicked()
         alert("you need to login first")
     }
 }
+
+
+
+function goSignIn(){
+    const signInRenderer = new signInRender()
+    signInRenderer.render()
+}
+function goSignUp(){
+    const signUpRenderer = new signUpRender()
+    signUpRenderer.render()
+}
+function signUp(){
+    let userName = $("#userName").val()
+    let password = $("#password").val()
+    let profilePic = $("#profilePic").val()
+    let bio = $("#bio").val()
+    //check if userName unique
+    //save to data base
+    const profilePageRenderer = new profilePageRender()
+    profilePageRenderer.render()
+}
+function signIn(){
+    let userName = $("#userNameSignIn").val()
+    let password = $("#passwordSignIn").val()
+    //check if userName exists 
+    //check if password correct
+    //get user 
+
+}
 function search()
 {
     let movieName =  $('#movieName').val()
@@ -67,3 +101,4 @@ $("#mainDiv").on("click" , ".search-li-a" ,function()
     // })
     console.log(this.innerHTML)
 })
+
