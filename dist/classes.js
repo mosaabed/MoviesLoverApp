@@ -20,7 +20,7 @@ class Post{
 }
 
 class Movie{
-    constructor(title, rating, votesNum, genre, director, actors, plot, poster, year, trailer){
+    constructor(title, rating, votesNum, genre, director, actors, plot, trailer, poster, year){
         this.title = title
         this.rating = rating
         this.votesNum = votesNum
@@ -28,8 +28,8 @@ class Movie{
         this.director = director
         this.actors = actors
         this.plot = plot
+        this.trailer = trailer
         this.poster = poster
         this.year = year
-        this.trailer = trailer
     }
 }

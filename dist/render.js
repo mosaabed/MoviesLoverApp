@@ -48,5 +48,21 @@ const moviesRender = function(movies){
 }
 
 const movieInfoRender = function(movie){
-    
+    $('#containerDiv').empty()
+    const source = $("#movieinfo-template").html()
+    const template = Handlebars.compile(source) 
+    const newHtml = template({title: movie.title, poster: movie.poster, rating: movie.rating, plot: movie.plot,votesNum: movie.votesNum, genre: movie.genre, year: movie.year, director: movie.director, actors: movie.actors, trailer: movie.trailer})
+    $('#containerDiv').append(newHtml)
+}
+
+const myShowsRender = function(movies){
+    console.log(movies)
+    $('#containerDiv').empty()
+    const source = $("#movie-template").html()
+    const template = Handlebars.compile(source) 
+    let len = movies.length
+    for(let i=0;i<len;i++){
+        const newHTML = template({title: movies[i].movieTitle, poster: movies[i].moviePic})
+        $('#mySavedMovies').append(newHTML)
+     }
 }

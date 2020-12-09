@@ -13,7 +13,14 @@ router.get('/searchByTitle/:title', function (request, response) {
     let searchKey = request.params.title
     urllib.request('http://www.omdbapi.com/?t='+searchKey+'&plot=full&apikey='+searchByTitleKey,function(err,res){
         let data = JSON.parse(res.toString())
-        response.send({title: data.Title, rating: data.imdbRating, votesNum:data.imdbVotes, genre: data.Genre, director: data.Director, actors: data.Actors.split(","), plot: data.Plot, trailer:"", poster: data.Poster, year: data.Year})
+        let actorsArr = []
+        if(data.Actors === undefined){
+            actorsArr = []
+        }
+        else{
+            actorsArr = data.Actors.split(",")
+        }
+        response.send({title: data.Title, rating: data.imdbRating, votesNum:data.imdbVotes, genre: data.Genre, director: data.Director, actors: actorsArr, plot: data.Plot, trailer:"", poster: data.Poster, year: data.Year})
     })
 })
 
@@ -105,7 +112,7 @@ router.post('/addCommentToPost', function(request, response){
 router.post('/addShowToFavorite', function(request, response){
     let params = request.body
     Person.find({userName: params.userName}, function (err, person) {
-        person[0].likedShows.push({movieTitle: params.moviePoster, moviePic: params.moviePoster})
+        person[0].likedShows.push({movieTitle: params.title, moviePic: params.poster})
         person[0].save()
         response.send("done")
     })
@@ -114,7 +121,7 @@ router.post('/addShowToFavorite', function(request, response){
 router.post('/addToWatchLater', function(request, response){
     let params = request.body
     Person.find({userName: params.userName}, function (err, person) {
-        person[0].watchLater.push({movieTitle: params.showTitle, moviePic: params.showPic})
+        person[0].watchLater.push({movieTitle: params.title, moviePic: params.poster})
         person[0].save()
         response.send("done")
     })
@@ -123,14 +130,14 @@ router.post('/addToWatchLater', function(request, response){
 router.get('/getFavoriteShows/:userName', function(request, response){
     let user = request.params.userName
     Person.find({userName: user}, function(err, user){
-        response.send(user.likedShows)
+        response.send(user[0].likedShows)
     })
 })
 
 router.get('/getWatchLaterShows/:userName', function(request, response){
     let user = request.params.userName
     Person.find({userName: user}, function(err, user){
-        response.send(user.watchLater)
+        response.send(user[0].watchLater)
     })
 })
 

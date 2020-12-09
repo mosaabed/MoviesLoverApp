@@ -76,4 +76,10 @@ const genres =[ {
   }
 ]
 
-module.exports = genres
+const findGenreId = function(genre){
+  for(ele of genres){
+    if(ele.name === genre){
+      return ele.id
+    }
+  }
+} 

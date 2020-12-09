@@ -82,12 +82,12 @@ function startSearch(){
 }
 
 function sharePost(){
-    let text  //$("")
-    let movieTitle
-    let moviePoster
+    let text = $('#post-text').val()
+    let movieTitle = $('.movie').children(".movie-title").html()
+    let moviePoster = $('img').attr('src');
     let newPost = new Post(text, currentProfile.userName, movieTitle, moviePoster, "")
     $.post('/sharePost', newPost, function (response){
-        console.log("post added")
+        console.log(text +" " + movieTitle +" "+moviePoster)
     })
     getHomePage()
 }
@@ -107,10 +107,8 @@ function searchByTitle(){
     })
 }
 
-const findGenreId = genre => genres.find(ele => ele.name === genre)
-
 function searchByGenre(){
-    let genre 
+    let genre = $("#search-genre").val()
     let genreID = findGenreId(genre)
     $.ajax({
         method: "GET",
@@ -129,54 +127,37 @@ function searchByGenre(){
 }
 
 function displayMovieInfo(){
-    let title
-    if(title === movieByTitle.title){
-        $.ajax({
-            method: "GET",
-            url: `/getTrailer/${title}`,
-            success: function (data){
-                movieByTitle.trailer = data
-                movieInfoRender(movieByTitle)
-            },
-            error: function (xhr, text, error) {
-                console.log(text)
-            }
-        })
-    }
-    else{
-        let index = moviesArr.findIndex(ele => ele.title === title)
-        $.ajax({
-            method: "GET",
-            url: `/searchByTitle/${title}`,
-            success: function (data){
-                let newMovie= new Movie(data.title, data.rating, data.votesNum, data.genre, data.director, data.actors, data.plot, data.trailer, data.poster, data.year)
-                $.ajax({
-                    method: "GET",
-                    url: `/getTrailer/${newMovie.title}`,
-                    success: function (link){
-                        newMovie.trailer = link
-                        movieInfoRender(newMovie)
-                    },
-                    error: function (xhr, text, error) {
-                        console.log(text)
-                    }
-                })
-                moviesRender([data])
-            },
-            error: function (xhr, text, error) {
-                console.log(text)
-            }
-        })
-    }
+    let title = $('#movie-div').children('p').html()
+    $.ajax({
+        method: "GET",
+        url: `/searchByTitle/${title}`,
+        success: function (data){
+            let newMovie= new Movie(data.title, data.rating, data.votesNum, data.genre, data.director, data.actors, data.plot, data.trailer, data.poster, data.year)
+            $.ajax({
+                method: "GET",
+                url: `/getTrailer/${newMovie.title}`,
+                success: function (link){
+                    newMovie.trailer = link
+                    movieInfoRender(newMovie)
+                },
+                error: function (xhr, text, error) {
+                    console.log(text)
+                }
+            })
+        },
+        error: function (xhr, text, error) {
+            console.log(text)
+        }
+    })
 }
 
 function likeMovie(){
-    let movieTitle
-    let poster
+    let title = $('.movie').children(".movie-title").html()
+    let poster = $('img').attr('src');
     let parameter ={
         userName: currentProfile.userName,
-        showTitle: movieTitle,
-        showPic: poster
+        title: title,
+        poster: poster
     }
     $.post('/addShowToFavorite', parameter, function(response){
         console.log("added to favorite shows")
@@ -184,15 +165,15 @@ function likeMovie(){
 }
 
 function watchLater(){
-    let movieTitle
-    let poster
+    let title = $('.movie').children(".movie-title").html()
+    let poster = $('img').attr('src');
     let parameter ={
         userName: currentProfile.userName,
-        showTitle: movieTitle,
-        showPic: poster
+        title: title,
+        poster: poster
     }
     $.post('/addToWatchLater', parameter, function(response){
-        console.log("added to watch later")
+        console.log("added to watch later shows")
     })
 }
 
@@ -223,7 +204,7 @@ function favoriteShows(){
         method: "GET",
         url: `/getFavoriteShows/${currentProfile.userName}`,
         success: function (data){
-            moviesRender(data)
+            myShowsRender(data)
         },
         error: function (xhr, text, error) {
             console.log(text)
@@ -237,7 +218,7 @@ function watchLaterShows(){
         method: "GET",
         url: `/getWatchLaterShows/${currentProfile.userName}`,
         success: function (data){
-            moviesRender(data)
+            myShowsRender(data)
         },
         error: function (xhr, text, error) {
             console.log(text)
