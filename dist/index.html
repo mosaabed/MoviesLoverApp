@@ -7,6 +7,8 @@
     <title>Movise Lover</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+     integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 </head>
 
@@ -15,6 +17,7 @@
         <li><a onclick="HomeClicked()" >Home</a></li>
         <li><a >Profile</a></li>
         <li><a >Search</a></li>
+        <li onclick="goSignIn()"><a >Sign In</a></li>
         <li style="float:right"><a class="active" >About</a></li>
     </ul>
       
@@ -38,12 +41,81 @@
         {{/each}}
     </script>
 
+    <script id="profilePage-template" type="text/x-handlebars-template">
+        <h1>My Profile</h1>
+        <h2 onclick="HomeClicked()">Home</h2>
+            <div class="user-info">
+                <img src="{{profilePic}}" alt="" id="profile-pic">
+                <div id="info">
+                    <div id="name">{{userName}}</div>
+                    <div id="bio">
+                        <span>Biography: </span>
+                        <p>{{text}}</p>
+                    </div>
+                </div>
+                <div>
+                    <i class="fas fa-heart"></i>
+                    <i class="far fa-clock"></i>
+                </div>
+            </div>
+    </script>
+
+    <script id="signIn-template" type="text/x-handlebars-template">
+        <h1>Sign In</h1>
+        <div id="SignIn-container">
+            <div>
+                <span>User Name: </span>
+                <input type="text" placeholder="Enter your User Name" id="userNameSignIn">
+            </div>
+            <div>
+                <span>Password: </span>
+                <input type="text" placeholder="Enter your password" id="passwordSignIn">
+            </div>
+            <div>
+                <button id="signIn" onclick="signIn()">Sign In</button>
+            </div>
+            <div>
+                <span id="signUp" onclick="goSignUp()">You are not registered yet? SignUp </span>
+            </div>
+
+        </div>
+    </script>
+
+    <script id="signUp-template" type="text/x-handlebars-template">
+        <h1>Sign Up</h1>
+        <div id="signUp-container">
+        <div>
+            <span>User Name: </span>
+            <input type="text" placeholder="Enter an User Name" id="userName">
+        </div>
+        <div>
+            <span>Password: </span>
+            <input type="text" placeholder="Enter a password" id="password">
+        </div>
+        <div>
+            <span>Profile Picture: </span>
+            <input type="text" placeholder="Enter your picture source" id="profilePic">
+        </div>
+        <div>
+            <span>Biography: </span>
+            <input type="text" placeholder="Tell us about yourself" id="bio">
+        </div>
+        <div>
+            <button id="signUp" onclick="signUp()">Sign Up</button>
+        </div>
+    </div>
+
+    </script>
+
     <script src="Render.js"></script>
     <script src="./jquery/dist/jquery.js"></script>
     <script src="./handlebars/dist/handlebars.js"></script>
     <script src="HomeRender.js"></script>
     <script src="ProfileRender.js"></script>
     <script src="SearchRender.js"></script>
+    <script src="signUpRender.js"></script>
+    <script src="signInRender.js"></script>
+    <script src="profilePageRender.js"></script>
     <script src="main.js"></script>
 </body>
 
