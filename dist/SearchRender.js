@@ -1,5 +1,6 @@
 class SearchRender
 {
+
     constructor(){
         this.genreList = ['Drama', 'Action' , 'Romance' , 'War']
     }
@@ -22,4 +23,3 @@ class SearchRender
         let newHtml = template(data)
         $('#resultOfSearch').empty().append(newHtml)
     }
-}

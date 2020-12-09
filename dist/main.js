@@ -1,15 +1,21 @@
+
 const homeRender = new HomeRender()
 const profileRender = new ProfileRender()
 const searchRender = new SearchRender()
 const loginPage = new LoginPage()
 
 
+
 let UserProfile = null
 UserProfile = loginPage.render()
 let User
+
 let UserProfile = 1
 //UserProfile = loginPage.render()
 
+
+
+function logIn(userName, password){
 
 
 function HomeClicked()
@@ -42,7 +48,7 @@ function ProfileClicked()
 
 function searchClicked()
 {
-    
+
     if(UserProfile != null ){
         console.log("search page opend")
         searchRender.render()
@@ -50,6 +56,11 @@ function searchClicked()
     {
         alert("you need to login first")
     }
+} 
+
+function search()
+{
+    let movieName =  $('#movieName').val()
 }
 
 
@@ -83,7 +94,6 @@ function signIn(){
 function search()
 {
     let movieName =  $('#movieName').val()
-   
     console.log( movieName)
     // $.get(`` , function(data)
     // {
@@ -91,7 +101,6 @@ function search()
     // })
     $('#movieName').val("")
     $('#movieYear').val("")
-    
 }
 $("#mainDiv").on("click" , ".search-li-a" ,function()
 {
@@ -100,5 +109,6 @@ $("#mainDiv").on("click" , ".search-li-a" ,function()
     //     searchRender.resultRender(data)
     // })
     console.log(this.innerHTML)
-})
+}) 
+
 
