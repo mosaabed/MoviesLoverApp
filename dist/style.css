@@ -1,4 +1,188 @@
-  .nav-ul {
+button {
+  width: 100px;
+  height: 25px;
+  border-radius: 6px;
+  background-color: #d0d1d1;
+  color: #2c3e50;
+  font-size: 1vmax;
+  cursor: pointer;
+}
+
+h1 {
+  color: #f5f8de;
+}
+
+h2 {
+  display: inline-block;
+}
+
+body{
+  background-color: #7e7c8e;
+}
+
+.fa-thumbs-up {
+  color:#ecf0f1;
+}
+
+.poster{
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  background-size: 100%;
+  justify-self: center;
+  align-self: middle;
+}
+
+#containerDiv{
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-gap: 1vmax;
+}
+
+#post-text{
+  float: left;
+}
+
+#share{
+  float:right;
+}
+
+.movies-container{
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-gap: 1vmax;
+}
+
+.post{
+  display: grid;
+  justify-self: center;
+  border-radius: 5%;
+    padding: 1vmax;
+    box-shadow: 1px 1px 3px black;
+    border-bottom-right-radius: 4px;
+    width: 95%;
+    background-color: #aba9c3;
+    font-size: 1.5vmax;
+    text-align: left;
+    color: #2c3e50;
+    padding: 1vmax;
+    font-family: 'Indie Flower', cursive;
+}
+
+.movie-div{
+  display: grid;
+  justify-self: center;
+  border-radius: 5%;
+    padding: 1vmax;
+    box-shadow: 1px 1px 3px black;
+    border-bottom-right-radius: 4px;
+    width: 95%;
+    background-color: #aba9c3;
+    font-size: 1.5vmax;
+    text-align: left;
+    color: #2c3e50;
+    padding: 1vmax;
+    font-family: 'Indie Flower', cursive;
+}
+
+.userImg{
+  display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-size: 100%;
+    vertical-align: middle;
+}
+
+#profile-pic{
+  display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-size: 100%;
+    vertical-align: middle;
+}
+
+#info {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 25px;
+  font-family: 'Nunito', sans-serif;
+  color: #2c3e50;
+}
+
+#biography{
+  text-align: left;
+    color: #2c3e50;
+    padding: 1vmax;
+    font-family: 'Indie Flower', cursive;
+}
+
+#watch{
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-gap: 1vmax;
+  color:#514f59 ;
+  text-align: left;
+  padding: 1vmax;
+  font-family: 'Indie Flower', cursive ;
+}
+
+.fa-heart{
+  color: #c0392b;
+}
+
+.fa-clock{
+  color: #5c415d;
+}
+
+#SignIn-container{
+  text-align: left;
+    color: #2c3e50;
+    padding: 1vmax;
+    font-family: 'Indie Flower', cursive;
+    width: 280px;
+    display: grid;
+    grid-gap: 1vmax;
+  
+}
+
+#signIn{
+  width: 280px;
+}
+
+input{
+  float: right;
+}
+
+#search-title{
+  float: left;
+}
+
+#search-genre{
+  float: left;
+}
+
+.searchBox{
+  display:inline-block;
+}
+
+#signUp-container{
+  text-align: left;
+    color: #2c3e50;
+    padding: 1vmax;
+    font-family: 'Indie Flower', cursive;
+    width: 280px;
+    display: grid;
+    grid-gap: 1vmax;
+  
+}
+
+#signUp{
+  width: 280px;
+}
+
+.nav-ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -7,6 +191,7 @@
   }
   
   .nav-li-a{
+    float: left;
     display: block;
     color: white;
     text-align: center;
