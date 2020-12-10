@@ -31,6 +31,7 @@
             </div>
         </div>
     </div>
+
     <script id="signup-template" type="text/x-handlebars-template"> 
         <h1>Sign Up</h1>
         <div id="signUp-container">
@@ -55,6 +56,7 @@
         </div>
     </div>
     </script>
+
     <script id="navbar-template" type="text/x-handlebars-template"> 
         <ul class = "nav-ul">
             <li style="float:left">
@@ -66,6 +68,7 @@
             <li style="float:right; background-color: #4CAF50"><a class="nav-li-a" >About</a></li>
         </ul>
     <div id = "containerDiv"></div>
+
     </script>
     <script id="post-template" type="text/x-handlebars-template">
         <div class="post" id={{postID}}>
@@ -95,6 +98,7 @@
             </div>
         </div>
     </script>
+  
     <script id="search-template" type="text/x-handlebars-template">
          <div class="header">
              <div class="searchBox">
@@ -123,16 +127,17 @@
                 </div>
                 <div id="watch"> 
                     <div>
-                        <span onclick="favoriteShows()">Movies I watched and liked </span>
-                        <i class="fas fa-heart"></i>
+                        <span>Movies I watched and liked </span>
+                        <i onclick="favoriteShows()"class="fas fa-heart"></i>
                     </div>
                     <div>
                         <span>Movies to watch later</span>
-                        <i class="far fa-clock"></i>
+                        <i onclick="watchLaterShows()" class="far fa-clock"></i>
                     </div>
                 </div>
             </div>
     </script>
+
     
     <script id="movie-template" type="text/x-handlebars-template">
         <div class="movie-div">
@@ -161,8 +166,7 @@
             <div id="share">
                 <button id="share" onclick="sharePost()">Share Movie</button>
             <input type="text" id="post-text" placeholder="write something about this movie...">   
-            </div>
-            
+            </div>  
         </div>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -173,4 +177,5 @@
     <script src="main.js"></script>
 </body>
 </html>
+
 

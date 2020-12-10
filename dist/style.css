@@ -23,7 +23,6 @@ body{
 .fa-thumbs-up {
   color:#ecf0f1;
 }
-
 .poster{
   width: 150px;
   height: 150px;
@@ -32,6 +31,7 @@ body{
   justify-self: center;
   align-self: middle;
 }
+
 
 #containerDiv{
   display: grid;
@@ -52,7 +52,6 @@ body{
   grid-template-rows: 1fr;
   grid-gap: 1vmax;
 }
-
 .post{
   display: grid;
   justify-self: center;
@@ -69,6 +68,7 @@ body{
     font-family: 'Indie Flower', cursive;
 }
 
+
 .movie-div{
   display: grid;
   justify-self: center;
@@ -84,7 +84,6 @@ body{
     padding: 1vmax;
     font-family: 'Indie Flower', cursive;
 }
-
 .userImg{
   display: inline-block;
     width: 20px;
@@ -93,6 +92,7 @@ body{
     background-size: 100%;
     vertical-align: middle;
 }
+
 
 #profile-pic{
   display: inline-block;
@@ -127,6 +127,7 @@ body{
   padding: 1vmax;
   font-family: 'Indie Flower', cursive ;
 }
+
 
 .fa-heart{
   color: #c0392b;
@@ -206,7 +207,7 @@ input{
   .active {
     background-color: #4CAF50;
   }
-
+​
   .search-ul {
     list-style-type: none;
     margin: 0;
@@ -227,7 +228,7 @@ input{
     background-color: #555;
     color: white;
   }
-
+​
   #movieName {
     float: left;
     padding: 14px 16px;

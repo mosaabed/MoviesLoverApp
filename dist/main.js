@@ -151,6 +151,7 @@ function displayMovieInfo(){
     })
 }
 
+
 function likeMovie(){
     let title = $('.movie').children(".movie-title").html()
     let poster = $('img').attr('src');
@@ -227,3 +228,4 @@ function watchLaterShows(){
 }
 
 $('#mainDiv').on('click','.movie-title',displayMovieInfo)
+
