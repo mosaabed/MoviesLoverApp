@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Movise Lover</title>
+    <title>Movies Lover</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -12,10 +11,12 @@
 </head>
 <body>
     <div id = "mainDiv">
+      <h2 style="color: #333232;">Welcome to Movies Lover </h2>
+      <i class="fas fa-video" style="color: #f4b886;"></i>
       <h1>Sign In</h1>
           <div id="SignIn-container">
             <div>
-                <span>User Name: </span>
+                <span class="userName">User Name: </span>
                 <input type="text" placeholder="Enter your User Name" id="userNameSignIn">
             </div>
             <div>
@@ -26,11 +27,11 @@
                 <button id="signIn" onclick="signIn()">Sign In</button>
             </div>
             <div>
-                <span id="signUp" onclick="goSignUp()">You are not registered yet? SignUp </span>
+                <span id="signUp" onclick="goSignUp()">You are not registered yet? <span style="color: blue;">Sign Up</span> </span>
             </div>
         </div>
     </div>
-    <!--THE SIGN UP TEMPLATE-->
+
     <script id="signup-template" type="text/x-handlebars-template"> 
         <h1>Sign Up</h1>
         <div id="signUp-container">
@@ -55,7 +56,7 @@
         </div>
     </div>
     </script>
-    <!--NAV BAR TEMPLATE-->
+
     <script id="navbar-template" type="text/x-handlebars-template"> 
         <ul class = "nav-ul">
             <li style="float:left">
@@ -67,13 +68,12 @@
             <li style="float:right; background-color: #4CAF50"><a class="nav-li-a" >About</a></li>
         </ul>
     <div id = "containerDiv"></div>
-    <div id = "mySavedMovies"></div>
+
     </script>
-    <!--THE POST TEMPLATE-->
     <script id="post-template" type="text/x-handlebars-template">
         <div class="post" id={{postID}}>
             <div>
-                <span style="color: #514f59;">{{userName}} say's about: {{movieTitle}}</span>
+                <span style="color: #514f59;">{{userName}} say's about {{movieTitle}}:</span>
             </div>
             <div>
                 <img class="poster" src="{{moviePoster}}" alt="">
@@ -98,25 +98,30 @@
             </div>
         </div>
     </script>
-    <!--THE SEARCH PAGE TEMPLATE-->
+  
     <script id="search-template" type="text/x-handlebars-template">
          <div class="header">
-            <input type="text" id="search-title">
-            <button onclick="searchByTitle()">Search By Title</button>
+             <div class="searchBox">
+                <input type="text" id="search-title">
+                <button onclick="searchByTitle()">Search By Title</button>
+             </div>
+             <div class="searchBox">
             <input type="text" id="search-genre">
             <button onclick="searchByGenre()">Search By Genre</button>
+             </div>
         </div>
         <div class="movies-container"></div>
     </script>
-    <!--THE PROFILE TEMPLATE-->
+   
+    
     <script id="profilePage-template" type="text/x-handlebars-template">
         <h1>My Profile</h1>
             <div class="user-info">
-                <img id="profilePic" src="{{profilePic}}" alt="" id="profile-pic">
+                <img src="{{profilePic}}" alt="" id="profile-pic">
                 <div id="info">
                     <div id="name">{{userName}}</div>
                 </div>
-                <div id="bio">
+                <div id="biography">
                     <span style="color:#514f59 ;">Biography: </span>
                     <p>{{bio}}</p>
                 </div>
@@ -132,19 +137,20 @@
                 </div>
             </div>
     </script>
-    <!--THE MOVIE TEMPLATE-->
+
+    
     <script id="movie-template" type="text/x-handlebars-template">
-        <div id="movie-div">
-            <p onclick = "displayMovieInfo()">{{title}}</p><br>
+        <div class="movie-div">
+            <p class="movie-title">{{title}}<br>
             <img src={{poster}} width='200' height='200' class='img'>
         </div>
     </script>
-    <!--THE MOVIE INFO TEMPLATE-->
+    
     <script id="movieinfo-template" type="text/x-handlebars-template">
         <div class="movie">
             <p class="movie-title">{{title}}</p>
             <img src={{poster}} width='200' height='200' class='img'>
-            <p id="basic-info">{{rating}}<br>{{votesNum}}<br>{{genre}}</p>
+            <p id="basic-info">{{pos}}<br>{{rating}}<br>{{votesNum}}<br>{{genre}}</p>
             <div class="additional-info">More Info:</div>
             <p>Year: {{year}}</p>
             <p>{{director}}</p>
@@ -154,18 +160,22 @@
                 {{/each}}
             </ul>
             <p id="plot">PLOT: {{plot}}</p><br>
-            <a class="trailer" href={{trailer}}>Movie Trailer</a><br><br>
+            <a class="trailer" href={{trailer}}>Movie Trailer</a>
             <i onclick="likeMovie()" class="fas fa-heart"></i>
             <i onclick="watchLater()" class="fas fa-clock"></i>
-            <button id="share" onclick="sharePost()">Share Movie</button>
-            <input type="text" id="post-text" placeholder="write something about this movie...">
+            <div id="share">
+                <button id="share" onclick="sharePost()">Share Movie</button>
+            <input type="text" id="post-text" placeholder="write something about this movie...">   
+            </div>  
         </div>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
-    <script src="render.js"></script>
     <script src="genres.js"></script>
+    <script src="render.js"></script>
     <script src="classes.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
+
+

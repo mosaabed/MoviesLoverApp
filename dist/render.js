@@ -12,6 +12,7 @@ const homeRender = function(homePosts){
     const template = Handlebars.compile(source) 
     const newHtml = template()
     $("#mainDiv").append(newHtml)
+    $('#containerDiv').append("<h1>what's new about movies?</h1>")
     const source1 = $('#post-template').html()
     const template1 = Handlebars.compile(source1)
     for(let i=0;i<homePosts.length;i++){
@@ -21,6 +22,7 @@ const homeRender = function(homePosts){
 }
 
 const profileRender = function(profile){
+    $('#mySavedMovies').empty()
     $('#containerDiv').empty()
     const source = $("#profilePage-template").html()
     const template = Handlebars.compile(source) 
@@ -29,6 +31,7 @@ const profileRender = function(profile){
 }
 
 const searchPage = function(){
+    $('#mySavedMovies').empty()
     $('#containerDiv').empty()
     const source = $("#search-template").html()
     const template = Handlebars.compile(source) 

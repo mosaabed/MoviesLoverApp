@@ -68,8 +68,8 @@ function signUp(){
     let bio = $("#bio").val()
     let newUser = new Profile(userName, password, pic, bio,"")
     $.post('/addNewUser', newUser, function (response) {
-        console.log("user added")
-        signInRender(newUser)
+        currentProfile = newUser
+        getHomePage()
     })
 }
 
@@ -127,7 +127,7 @@ function searchByGenre(){
 }
 
 function displayMovieInfo(){
-    let title = $('#movie-div').children('p').html()
+    let title = $(this).closest('.movie-div').find('.movie-title').text()
     $.ajax({
         method: "GET",
         url: `/searchByTitle/${title}`,
@@ -150,6 +150,7 @@ function displayMovieInfo(){
         }
     })
 }
+
 
 function likeMovie(){
     let title = $('.movie').children(".movie-title").html()
@@ -225,3 +226,6 @@ function watchLaterShows(){
         }
     })
 }
+
+$('#mainDiv').on('click','.movie-title',displayMovieInfo)
+

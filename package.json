@@ -1,7 +1,6 @@
 {
   "name": "moviesloverapp",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,5 +21,7 @@
     "jquery": "^3.5.1",
     "mongoose": "^5.11.5",
     "urllib": "^2.36.1"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
